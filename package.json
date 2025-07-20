@@ -1,5 +1,5 @@
 {
-  "name": "my-turborepo",
+  "name": "online-store",
   "version": "0.0.0",
   "private": true,
   "description": "",
@@ -14,13 +14,10 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
-    "prettier": "^3.2.5",
     "turbo": "^2.5.5"
   },
   "packageManager": "pnpm@8.15.5",
   "engines": {
-    "node": ">=18"
+    "node": ">=24"
   }
 }
