@@ -23,5 +23,6 @@
     "sourceMap": true,
     "strictNullChecks": false,
     "strictBindCallApply": false
-  }
+  },
+  "outDir": "./dist"
 }
