@@ -23,7 +23,6 @@
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.1.1",
     "@playwright/test": "^1.44.0",
-    "@repo/eslint-config": "workspace:*",
     "@testing-library/react": "^15.0.7",
     "@types/node": "^24.0.0",
     "@types/react": "^18.2.61",
