@@ -1,1 +1,5 @@
-const abcdefg = 1;
+const abcdefgh = 1;
+
+function domain_abcdefg() {
+  console.log(abcdefgh);
+}

@@ -1,0 +1,20 @@
+language js;
+
+or {
+    `var $name = $value`,
+    `let $name = $value`,
+    `const $name = $value`,
+    `function $name($args) { $body }`,
+    `$obj.$name = $value`,
+    `{ $name: $value }`,
+    `{ $name }`,
+    `($name) => $body`,
+    `function($name) { $body }`
+} where {
+    $name <: "abcdefg",
+    register_diagnostic(
+        span = $name,
+        message = "変数名に 'abcdefg' を使用してはいけません。より意味のある名前を使用してください。",
+        severity = "error"
+    )
+} 
