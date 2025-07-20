@@ -47,7 +47,6 @@ const config: Config = {
           editUrl:
             'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
-
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -72,6 +71,12 @@ const config: Config = {
           label: 'Tutorial',
         },
         {to: '/docs/roadmap', label: 'ロードマップ', position: 'left'},
+        {
+          type: 'docSidebar',
+          sidebarId: 'knowledgeSidebar',
+          position: 'left',
+          label: 'ナレッジベース',
+        },
         {
           href: 'https://github.com/facebook/docusaurus',
           label: 'GitHub',
