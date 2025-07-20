@@ -1,28 +1,34 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "declaration": true,
-    "declarationMap": true,
-    "esModuleInterop": true,
-    "isolatedModules": true,
-    "lib": ["es2022", "DOM", "DOM.Iterable"],
-    "noUncheckedIndexedAccess": true,
-    "resolveJsonModule": true,
-    "strict": true,
-    "allowSyntheticDefaultImports": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "forceConsistentCasingInFileNames": false,
-    "incremental": true,
-    "module": "commonjs",
-    "moduleResolution": "Node10",
-    "noFallthroughCasesInSwitch": false,
-    "noImplicitAny": false,
-    "removeComments": true,
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "strictNullChecks": false,
-    "strictBindCallApply": false
-  },
-  "outDir": "./dist"
+    // 📦 モジュール解決・環境設定
+    "module": "commonjs",                     // NestJSのデフォルト
+    "moduleResolution": "Node10",             // Node.js方式でモジュール解決
+    "allowSyntheticDefaultImports": true,     // CommonJSモジュールもimport可能
+    "esModuleInterop": true,                   // ESModules互換import
+    "isolatedModules": true,                   // モジュール単位でコンパイル安全性を確保
+    "lib": ["es2020", "esnext"],               // 最新ES機能を型定義に含める（DOM系は不要）
+
+    // 🎯 デコレーター・NestJS固有
+    "experimentalDecorators": true,            // デコレーター構文有効化（NestJS必須）
+    "emitDecoratorMetadata": true,             // 依存性注入用のメタデータ出力
+
+    // 🔒 型安全・コード品質
+    "strict": true,                            // 型チェック全般を厳格モードに
+    "noUncheckedIndexedAccess": true,          // インデックスアクセス時にundefined含める
+    "exactOptionalPropertyTypes": true,        // オプショナルプロパティの型を厳密化
+    "noImplicitOverride": true,                // 継承時のメソッド上書きを明示
+    "noFallthroughCasesInSwitch": true,        // switch-caseの落下防止
+    "forceConsistentCasingInFileNames": true,  // ファイル名の大文字小文字不整合防止
+
+    // ⚙️ ビルド・出力設定
+    "declaration": true,                       // 型定義ファイル（.d.ts）出力
+    "declarationMap": true,                    // 型定義用ソースマップ
+    "incremental": true,                       // 差分ビルドで高速化
+    "sourceMap": true,                         // ソースマップ生成
+    "removeComments": true,                    // コメント除去
+    "skipLibCheck": true,                      // 外部ライブラリの型チェックをスキップ
+
+    // 📤 出力先
+    "outDir": "./dist"
+  }
 }
