@@ -39,7 +39,6 @@ const sidebars: SidebarsConfig = {
         'roadmap/dev-environment/docs-setup',
         'roadmap/dev-environment/config-setup',
         'roadmap/dev-environment/git-hooks',
-        'roadmap/dev-environment/test-environment',
       ],
     },
     'roadmap/ai-environment',
