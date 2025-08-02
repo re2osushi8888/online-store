@@ -54,7 +54,20 @@ pre-push:
 pnpm lefthook install
 ```
 
-### 4. 動作確認
+### 4. 環境設定（WSL2環境の場合）
+WSL2環境でnodeコマンドが見つからないエラーが発生する場合は、以下のコマンドでシンボリックリンクを作成する必要があります：
+
+```bash
+sudo ln -s "$(which node)" /usr/local/bin/node
+```
+
+**エラー例**:
+```
+> git -c user.useConfigOnly=true commit --quiet --allow-empty-message --file -
+/usr/bin/env: 'node': No such file or directory
+```
+
+### 5. 動作確認
 - lefthook.ymlをpre-commitに変更して動作確認
 - 最終的にpre-pushに戻して本設定として確定
 
