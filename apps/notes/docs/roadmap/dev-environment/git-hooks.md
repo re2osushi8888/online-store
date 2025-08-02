@@ -11,122 +11,141 @@ Gitコミット時・プッシュ時の品質チェックを自動化し、コ�
 ## 進捗状況
 
 - **優先度**: 中
-- **状況**: 📋 予定
-- **予定完了**: 2024年2月
-- **担当者**: 未定
+- **状況**: ✅ 完了
+- **完了日**: 2024年12月
+- **担当者**: 実装済み
 
-## 実装予定項目
+## 実装済み項目
 
-### 1. pre-commit hooks設定
-**目標**: コミット前の自動品質チェック
+### 1. lefthook導入・設定
+**目標**: Gitフックの管理とコード品質チェックの自動化
 
-**チェック項目**:
-- [ ] ESLintによるコード品質チェック
-- [ ] TypeScriptコンパイルチェック
-- [ ] フォーマットチェック（ESLint Stylistic）
-- [ ] テストの実行（関連ファイルのみ）
-- [ ] ファイルサイズチェック
+**実装内容**:
+- [x] lefthookパッケージの導入
+- [x] pre-pushフックの設定
+- [x] lint実行の自動化
 
 **技術選択**:
-- **husky**: Git hooksの管理
-- **lint-staged**: ステージされたファイルのみ処理
+- **lefthook**: Git hooksの管理（huskyの代替として採用）
+- **Biome**: コード品質・フォーマットチェック
 
-### 2. commit-msg hooks設定
-**目標**: コミットメッセージの標準化
+## 実装手順
 
-**チェック項目**:
-- [ ] Conventional Commits形式の強制
-- [ ] コミットメッセージの文字数制限
-- [ ] 日本語・英語の混在チェック
-- [ ] 禁止ワードのチェック
-
-**メッセージ形式**:
-```
-<type>[optional scope]: <description>
-
-[optional body]
-
-[optional footer(s)]
+### 1. lefthookの導入
+```bash
+# lefthookパッケージの追加
+pnpm add -D lefthook
 ```
 
-**type例**:
-- `feat`: 新機能
-- `fix`: バグ修正
-- `docs`: ドキュメント
-- `style`: フォーマット
-- `refactor`: リファクタリング
-- `test`: テスト
+### 2. lefthook設定ファイルの作成
+`lefthook.yml`を作成し、以下の内容で設定:
 
-### 3. pre-push hooks設定
-**目標**: プッシュ前の最終チェック
+```yaml
+pre-push:
+  parallel: true
+  commands:
+    lint:
+      run: pnpm lint
+```
 
-**チェック項目**:
-- [ ] 全テストの実行
-- [ ] ビルドの成功確認
-- [ ] セキュリティ脆弱性チェック
-- [ ] 依存関係の整合性確認
+### 3. lefthookの初期化とインストール
+```bash
+# lefthookの初期化
+pnpm lefthook install
+```
 
-## 設定ファイル構成（予定）
+### 4. 動作確認
+- lefthook.ymlをpre-commitに変更して動作確認
+- 最終的にpre-pushに戻して本設定として確定
+
+## 現在の設定ファイル構成
 
 ```
 online-store/
-├── .husky/
-│   ├── pre-commit         # コミット前フック
-│   ├── commit-msg         # コミットメッセージフック
-│   └── pre-push          # プッシュ前フック
-├── .lintstagedrc.json    # lint-staged設定
-├── .commitlintrc.json    # コミットメッセージ設定
-└── package.json          # husky設定
+├── lefthook.yml          # lefthook設定ファイル
+├── package.json          # lefthookの依存関係定義
+└── .git/hooks/           # lefthookによって自動生成されるフック
+    └── pre-push          # pre-pushフック（自動生成）
 ```
 
-## 実装計画
+### lefthook.yml設定内容
+```yaml
+pre-push:
+  parallel: true
+  commands:
+    lint:
+      run: pnpm lint
+```
 
-### フェーズ1: 基本フック設定（3日間）
-- huskyのセットアップ
-- pre-commitフックの実装
-- lint-stagedの設定
+### package.json依存関係
+```json
+{
+  "devDependencies": {
+    "@biomejs/biome": "2.1.2",
+    "lefthook": "^1.12.2",
+    "turbo": "^2.5.5"
+  }
+}
+```
 
-### フェーズ2: コミットメッセージ管理（2日間）
-- commitlintの導入
-- commit-msgフックの実装
-- メッセージテンプレート作成
+## 実装完了項目
 
-### フェーズ3: 高度なチェック（2日間）
-- pre-pushフックの実装
-- セキュリティチェック統合
-- パフォーマンステスト
+### ✅ フェーズ1: 基本フック設定（完了）
+- [x] lefthookのセットアップ
+- [x] pre-pushフックの実装
+- [x] lint実行の自動化
 
-## 期待効果
+## 今後の実装計画
+
+### フェーズ2: コミットメッセージ管理（予定）
+- [ ] commitlintの導入
+- [ ] commit-msgフックの実装
+- [ ] メッセージテンプレート作成
+
+### フェーズ3: 高度なチェック（予定）
+- [ ] pre-commitフックの追加実装
+- [ ] セキュリティチェック統合
+- [ ] テスト実行の自動化
+
+## 実装効果
 
 ### 品質向上
-- コミット時点でのエラー早期発見
-- 一貫したコードスタイルの維持
-- テストカバレッジの向上
+- [x] プッシュ時点でのリントエラー早期発見
+- [x] 一貫したコードスタイルの維持（Biome使用）
+- [x] リモートリポジトリへの不正なコード流入防止
 
 ### 開発効率
-- レビュー時間の短縮
-- バグの早期発見・修正
-- CI/CD失敗率の低下
+- [x] CI/CD失敗率の低下（事前チェック実装）
+- [x] レビュー品質の向上
+- [x] 自動化による手作業削減
 
-### チーム統一
-- コミットメッセージの標準化
-- コーディング規約の自動遵守
-- 新メンバーのオンボーディング支援
+### 今後期待される効果
+- [ ] コミットメッセージの標準化
+- [ ] より詳細な事前チェック
+- [ ] 新メンバーのオンボーディング支援
 
 ## エスケープハッチ
 
 緊急時のフック無効化方法:
 ```bash
-# 一時的にフックを無効化
-git commit --no-verify
+# 一時的にプッシュ時フックを無効化
+git push --no-verify
 
-# フック自体を無効化
-git config core.hooksPath /dev/null
+# lefthookフックを一時的に無効化
+LEFTHOOK=0 git push
+
+# lefthook自体を無効化
+pnpm lefthook uninstall
 ```
 
 ## 成功指標
 
+### 現在達成済み
+- [x] lefthookの正常動作確認
+- [x] pre-pushフックでのlint実行
+- [x] 設定の文書化完了
+
+### 今後の目標
 - [ ] 全開発者のマシンでフックが正常動作
 - [ ] コミットメッセージ規約遵守率100%
-- [ ] pre-commitエラー率5%未満
 - [ ] CI/CD初回成功率95%以上 
