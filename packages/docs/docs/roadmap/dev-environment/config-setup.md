@@ -59,42 +59,43 @@ sidebar_position: 3
 - モジュール解決設定
 - 出力設定の最適化
 
-### 4. ESLint整備
-**目標**: コード品質管理のためのLinting設定
+### 4. Biome整備
+**目標**: 高速なLintingとフォーマッティング環境の構築
 
 **タスク**:
-- [ ] ESLint 9.x への更新
-- [ ] TypeScript対応設定
-- [ ] React/Vue.js用ルール設定
-- [ ] カスタムルールの追加
+- [ ] monorepoのルートディレクトリでBiome install
+- [ ] biome.jsoncの作成（`biome init --jsonc`コマンド）
+- [ ] 各package.jsonにBiomeコマンドを追加
+- [ ] 動作確認とルール調整
 
 **設定範囲**:
-- JavaScript/TypeScript構文
-- React/Vue.jsベストプラクティス
-- アクセシビリティルール
-- セキュリティルール
+- JavaScript/TypeScript構文チェック
+- コードフォーマッティング
+- Import文の整理
+- 高速なファイル処理
 
-### 5. PrettierからESLint Stylisticへの移行
-**目標**: フォーマット設定の統一とツールチェーン簡素化
+### 5. Turborepo連携設定
+**目標**: monorepo全体でのBiome実行環境構築
 
 **タスク**:
-- [ ] ESLint Stylistic プラグイン導入
-- [ ] Prettier設定の移行
-- [ ] エディタ設定の更新
-- [ ] CI/CDでのフォーマットチェック
+- [ ] turbo.jsonにBiomeタスク追加
+- [ ] ルートディレクトリでの一括実行設定
+- [ ] パッケージ間の依存関係考慮
+- [ ] CI/CDでのBiome実行設定
 
 **利点**:
-- ツールチェーンの統一
-- ESLintとの競合解消
-- カスタマイズ性の向上
+- 高速なLintingとフォーマッティング
+- ESLint + Prettierからの統一
+- Turborepoとの最適化された連携
 
 ## 設定ファイル構成（予定）
 
 ```
 online-store/
 ├── tsconfig.json              # ルート TypeScript 設定
-├── eslint.config.js           # ESLint 設定（Flat Config）
-├── packages/
+├── biome.jsonc                # Biome 設定（JSONC形式）
+├── turbo.json                 # Turborepo設定（Biomeタスク含む）
+├── apps/
 │   ├── docs/
 │   │   └── tsconfig.json      # docs固有設定
 │   ├── frontend/
@@ -105,21 +106,22 @@ online-store/
 
 ## 実装計画
 
-### フェーズ1: 基盤アップグレード（1週間）
+### フェーズ1
 - Node.js 24 への移行
 - TypeScript 7.0 への更新
 
-### フェーズ2: 設定統一（1週間）
+### フェーズ2
 - tsconfig.json の整備
-- ESLint設定の統一
+- Biome設定の統一
 
-### フェーズ3: フォーマッター移行（3日間）
-- Prettier → ESLint Stylistic
-- エディタ設定の更新
+### フェーズ3
+- Turborepo設定の追加
+- ルートディレクトリでの一括実行設定
 
 ## 成功指標
 
 - [ ] 全パッケージでNode.js 24が正常動作
 - [ ] TypeScriptコンパイルエラーゼロ
-- [ ] ESLintルール違反ゼロ
-- [ ] 統一されたコードフォーマット 
+- [ ] Biomeルール違反ゼロ
+- [ ] 統一されたコードフォーマット
+- [ ] Turborepoでの一括Biome実行成功 
