@@ -20,8 +20,7 @@
     "lint": {},
     "lint:fix": {},
     "lint:write": {},
-    "docs": {
-      "cache": false,
+    "notes": {
       "persistent": true
     },
     "test": {},

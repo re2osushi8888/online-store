@@ -13,7 +13,7 @@
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
     "lint:write": "turbo run lint:write",
-
+    "notes": "turbo run notes",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
