@@ -18,6 +18,12 @@
       ]
     },
     "lint": {},
+    "lint:fix": {},
+    "lint:write": {},
+    "docs": {
+      "cache": false,
+      "persistent": true
+    },
     "test": {},
     "test:e2e": {}
   }
